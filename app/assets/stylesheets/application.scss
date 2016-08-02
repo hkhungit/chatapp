@@ -1,0 +1,87 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'bootstrap';
+@import 'bootstrap-sprockets';
+
+.chatrooms {
+  .list-group-item {
+    cursor: pointer;
+  }
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  
+  .list-group-chatroom {
+    .chatroom {
+      width: 270px;
+      float: right;
+      margin: 5px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      background: #FFFFFF;
+      border: 1px solid #232323;
+      
+      .user-info {
+        color: #FFF;
+        background: #000;
+        padding: 10px; 
+      }
+
+      .messages {
+        margin: 0;
+        flex: 1;
+        overflow: scroll;
+        
+        .messages-inner {
+          width: 100%;
+          float: left;
+          
+          .message {
+            width: 100%;
+            float: left;
+            
+            p {
+              width: 80%;
+              border-radius: 10px;
+              padding: 5px 15px;
+              margin: 5px;
+              float: left;
+              
+              &.right{
+                float: right;
+                text-align: right;  
+                background: rgba(10, 10, 10, 0.65);
+                color: #ffffff;
+              }
+            }
+          }
+        }
+      }
+
+      .chatform {
+        .content {
+          width: 100%;
+          padding: 3px 10px;
+        }
+      }
+    }
+  }
+}

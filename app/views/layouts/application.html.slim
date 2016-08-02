@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title
+      | Chatmini
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header
+      nav.navbar.navbar-default
+          .navbar-header
+            button.navbar-toggle.collapsed data-toggle="collapse" data-target="#bs-example-navbar-collapse"
+              span.sr-only Toggle navigattion
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            = link_to 'Chat', root_path, class: 'navbar-brand'
+          .collapes.navbar-collapse#bs-example-navbar-collapse
+            ul.nav.navbar-nav
+            ul.nav.navbar-nav.navbar-right
+              - if user_signed_in?
+                = yield :right_nav
+                li.dropdown
+                  a.dropdown-toggle data-toggle="dropdown" role="button" href="#" #{current_user.username}
+                  ul.dropdown-menu
+                    li = link_to 'Setting', edit_user_registration_path
+                    li.divider
+                    li = link_to 'Logout', destroy_user_session_path, method: :delete
+              - else
+                li = link_to 'Sign Up', new_user_registration_path
+                li = link_to 'Sign In', new_user_session_path
+    article.container-fluid
+      .row
+        section.col-sm-3
+          - if user_signed_in?
+            h5 Chatrooms
+            = react_component('ChatroomsList', chatrooms: current_user.chatrooms) 
+        section.col-sm-9
+          = yield
+    footer
+      - if user_signed_in?
+        = react_component 'CurrentUser', current_user, {class: 'current-user'}
+        = react_component('ChatBar', chatrooms: current_user.chatrooms)
